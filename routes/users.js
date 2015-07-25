@@ -6,6 +6,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+
 router.get('/register', function(req, res, next) {
     res.render('register');
 });
@@ -26,6 +27,7 @@ router.post('/register', function(req, res, next) {
     });
 });
 
+
 router.get('/login', function(req, res, next) {
     res.render('login');
 });
@@ -45,6 +47,15 @@ router.post('/login', function(req, res, next) {
             res.send('There was an error logging in.');
         }
     });
+});
+
+
+router.get('/logout', function(req, res, next) {
+    //enableUnsafeCurrentUser discovered at
+    //https://groups.google.com/forum/#!topic/nodejs/F_0oI4_hETs
+    Parse.User.enableUnsafeCurrentUser();
+    Parse.User.logOut();
+    res.redirect('/');
 });
 
 module.exports = router;
