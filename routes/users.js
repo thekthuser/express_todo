@@ -26,4 +26,25 @@ router.post('/register', function(req, res, next) {
     });
 });
 
+router.get('/login', function(req, res, next) {
+    res.render('login');
+});
+
+router.post('/login', function(req, res, next) {
+    var username = req.body.username;
+    var password = req.body.password;
+
+    //enableUnsafeCurrentUser discovered at
+    //https://groups.google.com/forum/#!topic/nodejs/F_0oI4_hETs
+    Parse.User.enableUnsafeCurrentUser();
+    Parse.User.logIn(username, password, {
+        success: function(user) {
+            res.send('Successfully logged in.');
+        },
+        error: function(user, error) {
+            res.send('There was an error logging in.');
+        }
+    });
+});
+
 module.exports = router;
