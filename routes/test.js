@@ -9,10 +9,15 @@ router.get('/', function(req, res, next) {
     var testId = '2CbMEvOsfT';
     query.get(testId, {
         success: function(testObj) {
-            res.render('test', {title: testObj.get('foo')});
+            var currentUser = Parse.User.current();
+            if (currentUser) {
+                res.render('test', {user: currentUser.getUsername()});
+            } else {
+                res.render('test', {user: 'Nobody'});
+            }
         },
         error: function(object, error) {
-            res.render('test', { title: 'failed query' });
+            res.render('test', { user: 'failed query' });
         }
     });
 });
