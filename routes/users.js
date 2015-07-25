@@ -36,9 +36,6 @@ router.post('/login', function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
 
-    //enableUnsafeCurrentUser discovered at
-    //https://groups.google.com/forum/#!topic/nodejs/F_0oI4_hETs
-    Parse.User.enableUnsafeCurrentUser();
     Parse.User.logIn(username, password, {
         success: function(user) {
             res.send('Successfully logged in.');
@@ -51,9 +48,6 @@ router.post('/login', function(req, res, next) {
 
 
 router.get('/logout', function(req, res, next) {
-    //enableUnsafeCurrentUser discovered at
-    //https://groups.google.com/forum/#!topic/nodejs/F_0oI4_hETs
-    Parse.User.enableUnsafeCurrentUser();
     Parse.User.logOut();
     res.redirect('/');
 });

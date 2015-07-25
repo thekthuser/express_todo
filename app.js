@@ -12,6 +12,9 @@ var test = require('./routes/test');
 GLOBAL.Parse = require('parse').Parse;
 Parse.initialize('ieQkBpaks76VQuqHSZfujNZypPxl5pk2TKUKF2OJ', 
     'xvwzR2m0eL4cyFutLuqSiahvC7ySSEKAB83FT4Jq');
+//enableUnsafeCurrentUser discovered at
+//https://groups.google.com/forum/#!topic/nodejs/F_0oI4_hETs
+Parse.User.enableUnsafeCurrentUser();
 
 var app = express();
 
