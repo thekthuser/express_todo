@@ -8,6 +8,10 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+GLOBAL.Parse = require('parse').Parse;
+Parse.initialize('ieQkBpaks76VQuqHSZfujNZypPxl5pk2TKUKF2OJ', 
+    'xvwzR2m0eL4cyFutLuqSiahvC7ySSEKAB83FT4Jq');
+
 var app = express();
 
 // view engine setup
