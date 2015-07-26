@@ -7,23 +7,45 @@ router.get('/post', function(req, res, next) {
 });
 
 router.post('/post', function(req, res, next) {
+    var note = req.body.note;
+    if (note == '') {
+        res.send('Notes cannot be empty.');
+    }
+    if (req.body.checked) {
+        var checked = true;
+    } else {
+        var checked = false;
+    }
     var currentUser = Parse.User.current();
     if (currentUser) {
         var Item = Parse.Object.extend('Item');
-        var newItem = new Item();
-        var note = req.body.note;
-        var checked = req.body.checked;
-
-        //check this not empty
-        newItem.set('note', note);
-        newItem.set('checked', checked);
-        newItem.setACL(new Parse.ACL(currentUser));
-        newItem.save(null, {
-            success: function(newItem) {
-                res.send('Note successfully added.');
+        var query = new Parse.Query(Item);
+        query.equalTo('note', note);
+        query.first({
+            success: function(item) {
+                //executes on found
+                //executes on not found
+                if ((!item) || ((item) && (item.toJSON().checked == false))) {
+                    if (!item) {
+                        var item = new Item();
+                    }
+                    item.set('note', note);
+                    item.set('checked', checked);
+                    item.setACL(new Parse.ACL(currentUser));
+                    item.save(null, {
+                        success: function(item) {
+                            res.send('Note successfully added.');
+                        },
+                        error: function(item, error) {
+                            res.send('There was an error.');
+                        }
+                    });
+                } else {
+                    res.send('This note has been checked.');
+                }
             },
-            error: function(newItem, error) {
-                res.send('There was an error.');
+            error: function(error) {
+                res.send('query.first error');
             }
         });
     } else {
@@ -59,7 +81,7 @@ router.get('/all', function(req, res, next) {
         query.include(currentUser.id);
         query.find({
             success: function(items) {
-                res.send(items.toJSON());
+                res.send(items);
             },
             error: function(error) {
                 res.send('There was an error.');
