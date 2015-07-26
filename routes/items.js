@@ -62,7 +62,7 @@ router.post('/get', function(req, res, next) {
         success: function(item) {
             res.send(item.toJSON());
         },
-        error: function(onject, error){
+        error: function(object, error){
             res.send('There was an error.');
         }
     });
