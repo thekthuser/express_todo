@@ -27,7 +27,7 @@ router.post('/post', function(req, res, next) {
             }
         });
     } else {
-        res.send('There was an error.');
+        res.send('You must be logged in.');
     }
 });
 
@@ -66,7 +66,7 @@ router.get('/all', function(req, res, next) {
             }
         });
     } else {
-        res.send('There was an error.');
+        res.send('You must be logged in.');
     }
 });
 
