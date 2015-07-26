@@ -40,7 +40,6 @@ router.post('/get', function(req, res, next) {
         success: function(item) {
             res.send(item.toJSON());
         },
-
         error: function(onject, error){
             res.send('There was an error.');
         }
@@ -53,17 +52,22 @@ router.get('/get', function(req, res, next) {
 
 
 router.get('/all', function(req, res, next) {
-    var Item = Parse.Object.extend('Item');
-    var query = new Parse.Query(Item);
-    query.include(Parse.User.current().id);
-    query.find({
-        success: function(items) {
-            res.send(items.toJSON());
-        },
-        error: function(error) {
-            res.send('There was an error.');
-        }
-    });
+    var currentUser = Parse.User.current();
+    if (currentUser) {
+        var Item = Parse.Object.extend('Item');
+        var query = new Parse.Query(Item);
+        query.include(currentUser.id);
+        query.find({
+            success: function(items) {
+                res.send(items.toJSON());
+            },
+            error: function(error) {
+                res.send('There was an error.');
+            }
+        });
+    } else {
+        res.send('There was an error.');
+    }
 });
 
 module.exports = router;
