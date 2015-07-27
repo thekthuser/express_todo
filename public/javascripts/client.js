@@ -14,9 +14,17 @@ $(document).ready(function() {
     //console.log(item.fetch());
     item = item.fetch(
         {
-            data: $.param({id:'AEWyzREgdR'}),
+            data: {id: 'AEWyzREgdR'},
             type: 'POST',
         }
     );
     console.log(item);
+
+    /*
+    var saveItem = new Item({note: 'test save note', checked: false});
+    saveItem.save(null, {
+        type: 'POST',
+        url: '/items/post',
+    });
+    */
 });
