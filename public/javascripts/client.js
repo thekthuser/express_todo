@@ -8,13 +8,16 @@ $(document).ready(function() {
         url: '/items/all',
     });
 
+
+    //the following is test code to fetch Collections, fetch and save Models
+
     //var list = new ItemCollection();
     //console.log(list.fetch());
     var item = new Item();
     //console.log(item.fetch());
     item = item.fetch(
         {
-            data: {id: 'AEWyzREgdR'},
+            data: {id: 'AEWyzREgdR'}, //just an id known to exist for test user
             type: 'POST',
         }
     );
