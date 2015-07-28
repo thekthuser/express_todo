@@ -6,7 +6,8 @@ router.get('/post', function(req, res, next) {
     res.render('postItem');
 });
 
-router.post('/post', function(req, res, next) {
+//save/update Item
+router.post('/', function(req, res, next) {
     var note = req.body.note;
     if (note == '') {
         res.send('Notes cannot be empty.');
@@ -53,10 +54,12 @@ router.post('/post', function(req, res, next) {
     }
 });
 
-router.post('/get', function(req, res, next) {
+//get Item with id
+router.get('/:id', function(req, res, next) {
     var Item = Parse.Object.extend('Item');
     var query = new Parse.Query(Item);
-    var id = req.body.id;
+    //var id = req.body.id;
+    var id = req.params.id;
 
     query.get(id, {
         success: function(item) {
@@ -73,7 +76,8 @@ router.get('/get', function(req, res, next) {
 });
 
 
-router.get('/all', function(req, res, next) {
+//get all Items
+router.get('/', function(req, res, next) {
     var currentUser = Parse.User.current();
     if (currentUser) {
         var Item = Parse.Object.extend('Item');

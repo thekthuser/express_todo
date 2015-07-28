@@ -1,33 +1,33 @@
 $(document).ready(function() {
     var Item = Backbone.Model.extend({
         idAttribute: 'objectId',
-        url: '/items/get/',
+        urlRoot: '/items',
     });
     var ItemCollection = Backbone.Collection.extend({
         model: Item,
-        url: '/items/all',
+        url: '/items/',
     });
 
-
-    //the following is test code to fetch Collections, fetch and save Models
-
-    //var list = new ItemCollection();
-    //console.log(list.fetch());
-    var item = new Item();
-    //console.log(item.fetch());
-    item = item.fetch(
-        {
-            data: {id: 'AEWyzREgdR'}, //just an id known to exist for test user
-            type: 'POST',
-        }
-    );
-    console.log(item);
 
     /*
-    var saveItem = new Item({note: 'test save note', checked: false});
-    saveItem.save(null, {
-        type: 'POST',
-        url: '/items/post',
+    //var list = new ItemCollection();
+    //console.log(list.fetch());
+
+    //var item = new Item({objectId: 'AEWyzREgdR'});
+    //console.log(item.fetch());
+    
+    //var item = new Item({note: 'test66', checked: false});
+    //item.save();
+
+    var item = new Item({objectId: 'ifFhfBswsf'});
+    //item.set({checked: true});
+    item.fetch({
+        success: function(model) {
+            //console.log(model.checked);
+            item.set({checked: false});
+            item.save();
+        }
     });
     */
+
 });
