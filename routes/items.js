@@ -10,7 +10,7 @@ router.get('/post', function(req, res, next) {
 router.post('/', function(req, res, next) {
     var note = req.body.note;
     if (note == '') {
-        res.send('Notes cannot be empty.');
+        res.send("Notes cannot be empty.<br /><a href='/'>return</a>");
     }
     if (req.body.checked) {
         var checked = true;
@@ -35,22 +35,25 @@ router.post('/', function(req, res, next) {
                     item.setACL(new Parse.ACL(currentUser));
                     item.save(null, {
                         success: function(item) {
-                            res.send('Note successfully added.');
+                            res.send("Note successfully added or updated.<br />\
+                                <a href='/'>return</a>");
                         },
                         error: function(item, error) {
-                            res.send('There was an error.');
+                            res.send("There was an error.<br /><a href='/'>return</a>");
                         }
                     });
                 } else {
-                    res.send('This note has been checked.');
+                    //res.send('This note has been checked.');
+                    res.send("This note has been checked.<br /><a href='/'>return</a>");
+                    //res.redirect('/');
                 }
             },
             error: function(error) {
-                res.send('query.first error');
+                res.send("There was an error.<br /><a href='/'>return</a>");
             }
         });
     } else {
-        res.send('You must be logged in.');
+        res.send("You must be logged in.<br /><a href='/users/login'>Login</a>");
     }
 });
 
@@ -66,7 +69,7 @@ router.get('/:id', function(req, res, next) {
             res.send(item.toJSON());
         },
         error: function(object, error){
-            res.send('There was an error.');
+            res.send("There was an error.<br /><a href='/'>return</a>");
         }
     });
 });
@@ -88,11 +91,11 @@ router.get('/', function(req, res, next) {
                 res.send(items);
             },
             error: function(error) {
-                res.send('There was an error.');
+                res.send("There was an error.<br /><a href='/'>return</a>");
             }
         });
     } else {
-        res.send('You must be logged in.');
+        res.send("You must be logged in.<br /><a href='/users/login'>return</a>");
     }
 });
 
