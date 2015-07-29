@@ -8,7 +8,7 @@ router.get('/post', function(req, res, next) {
 
 //save/update Item
 router.post('/', function(req, res, next) {
-    var note = req.body.note;
+    var note = req.sanitize(req.body.note);
     if (note == '') {
         res.send("Notes cannot be empty.<br /><a href='/'>return</a>");
     }
