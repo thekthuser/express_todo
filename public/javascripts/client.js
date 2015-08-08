@@ -29,7 +29,7 @@
     });
     */
 
-var list = new ItemCollection();
+    var list = new ItemCollection();
     var View = Backbone.View.extend({
         el: '#container',
         template: _.template("\
