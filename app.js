@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var test = require('./routes/test');
 var items = require('./routes/items');
 
 GLOBAL.Parse = require('parse').Parse;
@@ -34,7 +33,6 @@ app.use(expressSanitizer());
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/test', test);
 app.use('/items', items);
 
 // catch 404 and forward to error handler
