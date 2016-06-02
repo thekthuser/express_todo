@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var items = require('./routes/items');
 
+//note: this Application ID does not need to be secret
 GLOBAL.Parse = require('parse').Parse;
 Parse.initialize('ieQkBpaks76VQuqHSZfujNZypPxl5pk2TKUKF2OJ', 
     'xvwzR2m0eL4cyFutLuqSiahvC7ySSEKAB83FT4Jq');
